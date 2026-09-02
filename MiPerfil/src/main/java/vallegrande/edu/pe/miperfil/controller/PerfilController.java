@@ -1,0 +1,40 @@
+package vallegrande.edu.pe.miperfil.controller;
+
+import vallegrande.edu.pe.miperfil.model.Perfil;
+import vallegrande.edu.pe.miperfil.view.PerfilView;
+
+public class PerfilController {
+    private PerfilView view;
+
+    public PerfilController(PerfilView view) {
+        this.view = view;
+        view.getBtnMostrar().setOnAction(e -> mostrarPerfil());
+        view.getBtnLimpiar().setOnAction(e -> limpiarCampos());
+    }
+
+    private void mostrarPerfil() {
+        String nombre = view.getTxtNombre().getText();
+        String carrera = view.getTxtCarrera().getText();
+        String semestre = view.getTxtSemestre().getText();
+        String cursoFavorito = view.getTxtCursoFavorito().getText();
+
+        Perfil perfil = new Perfil(
+                nombre,
+                carrera,
+                semestre,
+                cursoFavorito
+        );
+
+        view.getLblResultado().setText(
+                perfil.obtenerPresentacion()
+        );
+    }
+
+    private void limpiarCampos() {
+        view.getTxtNombre().clear();
+        view.getTxtCarrera().clear();
+        view.getTxtSemestre().clear();
+        view.getTxtCursoFavorito().clear();
+        view.getLblResultado().setText("");
+    }
+}
